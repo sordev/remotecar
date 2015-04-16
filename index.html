@@ -1,0 +1,88 @@
+﻿<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <title>Remote Car Control</title>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<style>
+		ul.control {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			width: 186px;
+		}
+
+		ul.control li {
+			float: left;
+			display: block;
+			height: 50px;
+			width: 50px;
+			text-align: center;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin: 5px;
+			font: 700 35px/50px sans-serif;
+			color: brown;
+			background: #eee;
+			cursor:pointer;
+		}
+		ul.control li:hover{
+			background:#e6e6e6;
+		}
+		</style>
+    </head>
+    <body>
+		<ul class="control">
+			<li class="tl">
+				↖
+			</li>
+			<li class="t">
+				↑
+			</li>
+			<li class="tr">
+				↗
+			</li>
+			<li class="l">
+				←
+			</li>
+			<li class="off">
+				off
+			</li>
+			<li class="r">
+				→
+			</li>
+			<li class="bl">
+				↙
+			</li>
+			<li class="b">
+				↓
+			</li>
+			<li class="br">
+				↘
+			</li>
+		</ul>
+       
+		
+		<script>
+
+            $(document).ready(function(){
+                $('.control li').click(function(){
+                    command = $(this).attr('class');
+					
+
+                    $.ajax({
+                        url: 'ajaxtest.py',
+                        type: 'post',
+                        datatype: 'JSON',
+                        data: {'command':command},
+                        success: function(d){
+                            console.log(d);
+                        }
+                    });
+                });
+            });
+
+        </script>
+    </body>
+
+</html>
